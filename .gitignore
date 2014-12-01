@@ -1,0 +1,6 @@
+latest_issue
+.DS_Store
+.idea
+node_modules
+latest
+config.json

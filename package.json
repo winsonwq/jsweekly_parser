@@ -1,0 +1,18 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "javascript weeky parser to offline static articles",
+  "main": "index.js",
+  "scripts": {
+    "parse": "rm -rf ./latest && mkdir ./latest && node --harmony index.js"
+  },
+  "author": "winsonwq@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "byline": "^4.1.1",
+    "co": "^4.0.1",
+    "request": "^2.49.0",
+    "through2": "^0.6.3",
+    "thunkify": "^2.1.2"
+  }
+}
