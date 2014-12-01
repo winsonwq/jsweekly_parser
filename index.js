@@ -9,7 +9,8 @@ const articleInlineStyle = '' +
   'max-width: 700px;' +
   'font-family: \'Helvetica Neue\', Helvetica, \'Segoe UI\', Arial, freesans, sans-serif;' +
   'padding: 50px;' +
-  'line-height: 1.25;';
+  'line-height: 1.25;' +
+  'background: #f9f9f9;';
 
 const articleListInlineStyle = '' +
   'font-size: 14px;';
