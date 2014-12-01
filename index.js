@@ -1,6 +1,7 @@
 var co = require('co');
 var thunkify = require('thunkify');
 var FS = require('fs');
+var PATH = require('path');
 var pageParse = require('./page_parse');
 var readabilityRead = require('./readability_read.js');
 
@@ -47,7 +48,11 @@ function articleHtmlFileName(link) {
 }
 
 function pageWrapper(articleContent) {
-  return '<div style="' + articleInlineStyle + '">' + articleContent + '</div>';
+  return '' +
+    '<!doctype html>' +
+    '<div style="' + articleInlineStyle + '">' +
+      articleContent +
+    '</div>';
 }
 
 function formatIndex(issueObj) {
@@ -59,7 +64,9 @@ function formatIndex(issueObj) {
     '<small>All Articles Are Copyrighted By Their Respective Copyright Owners.</small>';
 }
 
-function main() {
+function generateIssue(outputPath) {
+  outputPath = outputPath || 'laetst';
+
   co(function* () {
     var issueObj = yield thunkify(pageParse.latestIssueParser)();
     var links = issueObj.links;
@@ -69,7 +76,6 @@ function main() {
       });
     });
 
-    var outputPath = 'latest';
     var generateFiles = links.map(function (link, idx) {
       return thunkify(FS.writeFile)(outputPath + '/' + articleHtmlFileName(link), contents[idx]);
     });
@@ -81,6 +87,12 @@ function main() {
   }).catch(function (ex) {
     console.error(ex.stack);
   });
+
 }
 
-main();
+var argv = process.argv;
+var outputPath = 'latest';
+if (argv.length > 2) {
+  outputPath = PATH.resolve(__dirname, argv.pop());
+}
+generateIssue(outputPath);

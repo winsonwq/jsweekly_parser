@@ -4,3 +4,4 @@ latest_issue
 node_modules
 latest
 config.json
+npm-debug.log
